@@ -10,6 +10,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.NetworkInterface
 import java.net.SocketException
+import com.google.gson.Gson
+
+
 
 
 /**
@@ -19,11 +22,14 @@ import java.net.SocketException
  *
  */
 object ApiManager {
+    var gson = GsonBuilder()
+        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        .create()
 
     private var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(ConfigutarionFile.LIVE_PRICING_API_URL)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) //This will make retrofit use Rx Calls instead Retrofit Calls
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create())) // We delegate to Gson to make the conversions
+        .addConverterFactory(GsonConverterFactory.create(gson)) // We delegate to Gson to make the conversions
         .client(OkHttpClient())
         .build()
 

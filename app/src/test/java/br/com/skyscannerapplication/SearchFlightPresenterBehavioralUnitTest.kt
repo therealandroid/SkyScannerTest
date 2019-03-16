@@ -2,8 +2,8 @@ package br.com.skyscannerapplication
 
 import br.com.skyscannerapplication.mocks.MockedData
 import br.com.skyscannerapplication.model.repository.LivePricingRepository
-import br.com.skyscannerapplication.view.flights.SearchFlightsContract
-import br.com.skyscannerapplication.view.flights.SearchFlightsPresenter
+import br.com.skyscannerapplication.view.flights.FlightResultsContract
+import br.com.skyscannerapplication.view.flights.FlightResultsPresenter
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -22,24 +22,24 @@ import org.mockito.runners.MockitoJUnitRunner
  *
  */
 @RunWith(MockitoJUnitRunner::class)
-class SearchFlightsPresenterBehavioralUnitTest {
+class SearchFlightPresenterBehavioralUnitTest {
 
     @Mock lateinit var repository: LivePricingRepository
-    @Mock lateinit var view: SearchFlightsContract.View
+    @Mock lateinit var view: FlightResultsContract.View
 
-    lateinit var searchFlightsPresenter: SearchFlightsPresenter
+    lateinit var flightResultsPresenter: FlightResultsPresenter
 
     @Before
     fun setup() {
         ImediateSchedulers.setImediateExecutor()
         MockitoAnnotations.initMocks(this)
-        searchFlightsPresenter = SearchFlightsPresenter(repository, view)
+        flightResultsPresenter = FlightResultsPresenter(repository, view)
     }
 
     @Test
     fun test_searchFlight_shouldHandle_empty() {
         `when`(repository.getFlights(MockedData.SAMPLE_FLIGHT_REQUEST)).thenReturn(Single.just(mutableListOf()))
-        searchFlightsPresenter.searchFlights(MockedData.SAMPLE_FLIGHT_REQUEST)
+        flightResultsPresenter.searchFlights(MockedData.SAMPLE_FLIGHT_REQUEST)
         verify(view).setProgressIndicator(true) //make sure this method is being called first
         verify(view).showFlightResultsEmpty()
         verify(view).setProgressIndicator(false) //make sure this method is being called at end
@@ -48,7 +48,7 @@ class SearchFlightsPresenterBehavioralUnitTest {
     @Test
     fun test_searchFlight_shouldHandle_success() {
         `when`(repository.getFlights(MockedData.SAMPLE_FLIGHT_REQUEST)).thenReturn(Single.just(MockedData.MANY_FLIGHT_RESULTS))
-        searchFlightsPresenter.searchFlights(MockedData.SAMPLE_FLIGHT_REQUEST)
+        flightResultsPresenter.searchFlights(MockedData.SAMPLE_FLIGHT_REQUEST)
         verify(view).setProgressIndicator(true) //make sure this method is being called first
         verify(view).showFlightResults(MockedData.MANY_FLIGHT_RESULTS)
         verify(view).setProgressIndicator(false) //make sure this method is being called at end
@@ -57,7 +57,7 @@ class SearchFlightsPresenterBehavioralUnitTest {
     @Test
     fun test_searchFlight_shouldHandle_error() {
         `when`(repository.getFlights(MockedData.SAMPLE_FLIGHT_REQUEST)).thenReturn(Single.error(Throwable()))
-        searchFlightsPresenter.searchFlights(MockedData.SAMPLE_FLIGHT_REQUEST)
+        flightResultsPresenter.searchFlights(MockedData.SAMPLE_FLIGHT_REQUEST)
         verify(view).setProgressIndicator(true) //make sure this method is being called first
         // This message should be the same as you display in your R.string.error in the presenter call
         verify(view).showFlightResultsError("THIS IS A ERROR!!")

@@ -1,6 +1,6 @@
 package br.com.skyscannerapplication.model.apiwrapper.routes
 
-import br.com.skyscannerapplication.model.entities.api.Flights
+import br.com.skyscannerapplication.model.entities.api.Flight
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.*
@@ -55,6 +55,6 @@ interface LivePricingService {
      *
      */
     @GET
-    fun getFlights(@Url string: String, @Query("apiKey") apiKey: String): Single<List<Flights>>
+    fun getFlights(@Url string: String, @Query("apiKey") apiKey: String): Single<Flight>
 
 }

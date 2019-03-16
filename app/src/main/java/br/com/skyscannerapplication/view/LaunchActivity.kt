@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.com.skyscannerapplication.R
-import br.com.skyscannerapplication.view.flights.SearchFlightsFragment
+import br.com.skyscannerapplication.view.flights.FlightResultsFragment
 
 /**
  * This is the main Activity
@@ -16,7 +16,7 @@ class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setFragment(SearchFlightsFragment())
+        setFragment(FlightResultsFragment())
     }
 
     fun setFragment(fragment: Fragment) {

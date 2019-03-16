@@ -1,7 +1,7 @@
 package br.com.skyscannerapplication.mocks
 
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResult
+import br.com.skyscannerapplication.model.entities.out.FlightResponse
 
 object MockedData {
      val SAMPLE_FLIGHT_REQUEST = FlightRequest(
@@ -22,16 +22,16 @@ object MockedData {
 
 
      val MANY_FLIGHT_RESULTS = mutableListOf(
-        FlightResult(
+        FlightResponse(
             1
         ),
-        FlightResult(
+        FlightResponse(
             2
         ),
-        FlightResult(
+        FlightResponse(
             3
         ),
-        FlightResult(
+        FlightResponse(
             4
         )
     )

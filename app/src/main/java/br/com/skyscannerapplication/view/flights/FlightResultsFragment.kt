@@ -5,15 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.skyscannerapplication.R
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResult
+import br.com.skyscannerapplication.model.entities.out.FlightResponse
 import br.com.skyscannerapplication.model.repository.LivePricingRepositoryImpl
 import kotlinx.android.synthetic.main.fragment_search_flights.*
+import kotlinx.android.synthetic.main.fragment_search_flights.view.*
 
-class SearchFlightsFragment : Fragment(), SearchFlightsContract.View {
+class FlightResultsFragment : Fragment(), FlightResultsContract.View {
 
-    private val searchFlightsPresenter = SearchFlightsPresenter(LivePricingRepositoryImpl(), this)
+    private val searchFlightsPresenter = FlightResultsPresenter(LivePricingRepositoryImpl(), this)
 
     private val FLIGHT_REQUEST_FORM_DATA = FlightRequest(
         cabinclass = "Economy",
@@ -31,34 +33,38 @@ class SearchFlightsFragment : Fragment(), SearchFlightsContract.View {
         apikey = "ss630745725358065467897349852985"
     )
 
+    val adapter = FlightResultsAdapter()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search_flights, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        flightRequest.setOnClickListener {
-            searchFlightsPresenter.searchFlights(
-                FLIGHT_REQUEST_FORM_DATA
-            )
-        }
+        view.flightResultsRecyclerView.layoutManager = LinearLayoutManager(context)
+        view.flightResultsRecyclerView.adapter = adapter
+        searchFlightsPresenter.searchFlights(
+            FLIGHT_REQUEST_FORM_DATA
+        )
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun setProgressIndicator(boolean: Boolean) {
+    override fun setProgressIndicator(isLoading: Boolean) {
+        if (isLoading) {
+            progressIndicator.visibility = View.VISIBLE
+        } else {
+            progressIndicator.visibility = View.GONE
+        }
     }
 
-    override fun showFlightResults(flights: MutableList<FlightResult>) {
+    override fun showFlightResults(flights: MutableList<FlightResponse>) {
+        adapter.setData(flights)
     }
 
     override fun showFlightResultsEmpty() {
     }
 
     override fun showFlightResultsError(errorMessage: String) {
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onStop() {

@@ -2,8 +2,9 @@ package br.com.skyscannerapplication.model.repository
 
 import br.com.skyscannerapplication.model.apiwrapper.ApiManager
 import br.com.skyscannerapplication.model.apiwrapper.ConfigutarionFile
+import br.com.skyscannerapplication.model.entities.api.Flight
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResult
+import br.com.skyscannerapplication.model.entities.out.FlightResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -41,22 +42,33 @@ class LivePricingRepositoryImpl : LivePricingRepository {
      *  need to handle conversions, mapping etc.
      *
      */
-    override fun getFlights(flightRequest: FlightRequest): Single<MutableList<FlightResult>> {
+    override fun getFlights(flightRequest: FlightRequest): Single<MutableList<FlightResponse>> {
         return createSession(flightRequest)
             .flatMap { redirectUrl ->
                 ApiManager.livePricingRoute
                     .getFlights(redirectUrl, ConfigutarionFile.API_KEY)
                     .map {
-                        //Make the conversion here
-                        mutableListOf(
-                            FlightResult(1),
-                            FlightResult(2),
-                            FlightResult(3),
-                            FlightResult(4),
-                            FlightResult(5)
-                        )
+                        processFlightResult(it)
                     }
             }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+    }
+
+
+    /**
+     * We process the data to be manipulated by the view later
+     *
+     */
+    private fun processFlightResult(flight: Flight): MutableList<FlightResponse> {
+        //TODO add the necessary data
+        return flight.legs.map { leg ->
+            FlightResponse(
+                id = leg.id,
+                departure = leg.departure,
+                arrival = leg.arrival,
+                duration = leg.duration,
+                directionality = leg.directionality
+            )
+        }.toMutableList()
     }
 }

@@ -3,16 +3,14 @@ package br.com.skyscannerapplication.view.flights
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
 import br.com.skyscannerapplication.model.repository.LivePricingRepository
 import br.com.skyscannerapplication.view.base.BasePresenter
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 
-class SearchFlightsPresenter(
+class FlightResultsPresenter(
     private val repository: LivePricingRepository,
-    private val view: SearchFlightsContract.View
+    private val view: FlightResultsContract.View
 ) :
-    BasePresenter, SearchFlightsContract.Presenter {
+    BasePresenter, FlightResultsContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
 

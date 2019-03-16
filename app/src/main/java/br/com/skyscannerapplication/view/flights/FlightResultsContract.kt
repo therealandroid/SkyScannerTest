@@ -1,9 +1,9 @@
 package br.com.skyscannerapplication.view.flights
 
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResult
+import br.com.skyscannerapplication.model.entities.out.FlightResponse
 
-interface SearchFlightsContract {
+interface FlightResultsContract {
 
     interface Presenter {
         fun searchFlights(flightRequest: FlightRequest)
@@ -11,7 +11,7 @@ interface SearchFlightsContract {
 
     interface View {
         fun setProgressIndicator(boolean: Boolean)
-        fun showFlightResults(flights: MutableList<FlightResult>)
+        fun showFlightResults(flights: MutableList<FlightResponse>)
         fun showFlightResultsEmpty()
         fun showFlightResultsError(errorMessage: String)
     }

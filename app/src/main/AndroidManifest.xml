@@ -7,6 +7,7 @@
         1 - Added tools:ignore="GoogleAppIndexingWarning"
         2 - Added Permission Internet
         3 - Added android:networkSecurityConfig="@xml/security_config"  -> Reason("CLEARTEXT communication to partners.api.skyscanner.net not permitted by network security policy")
+        4 - android:hardwareAccelerated="true" -> Reason This enable CardView shadow and other features
      -->
 
     <application android:allowBackup="true"
@@ -14,6 +15,7 @@
                  android:icon="@mipmap/ic_launcher"
                  android:roundIcon="@mipmap/ic_launcher_round"
                  android:supportsRtl="true"
+                 android:hardwareAccelerated="true"
                  android:theme="@style/AppTheme"
                  android:networkSecurityConfig="@xml/security_config"
                  tools:ignore="GoogleAppIndexingWarning">
