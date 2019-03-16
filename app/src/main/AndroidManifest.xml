@@ -1,9 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="br.com.skyscannerapplication">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <!-- Track Modifications
         1 - Added tools:ignore="GoogleAppIndexingWarning"
-
+        2 - Added Permission Internet
+        3 - Added android:networkSecurityConfig="@xml/security_config"  -> Reason("CLEARTEXT communication to partners.api.skyscanner.net not permitted by network security policy")
      -->
 
     <application android:allowBackup="true"
@@ -12,6 +15,7 @@
                  android:roundIcon="@mipmap/ic_launcher_round"
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme"
+                 android:networkSecurityConfig="@xml/security_config"
                  tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".view.LaunchActivity">

@@ -3,13 +3,16 @@ package br.com.skyscannerapplication.view.flights
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
 import br.com.skyscannerapplication.model.repository.LivePricingRepository
 import br.com.skyscannerapplication.view.base.BasePresenter
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+
 
 class SearchFlightsPresenter(
     private val repository: LivePricingRepository,
     private val view: SearchFlightsContract.View
 ) :
-    BasePresenter {
+    BasePresenter, SearchFlightsContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -18,21 +21,21 @@ class SearchFlightsPresenter(
      * returning all flights available for the matching input
      *
      */
-    fun searchFlights(flightRequest: FlightRequest) {
+    override fun searchFlights(flightRequest: FlightRequest) {
         view.setProgressIndicator(true)
 
-        compositeDisposable.add(repository.searchFlights(flightRequest)
+        compositeDisposable.add(repository.getFlights(flightRequest)
             .doFinally {
                 view.setProgressIndicator(false)
-            }
-            .subscribe({
+            }.subscribe({
                 if (it.isNotEmpty()) {
                     view.showFlightResults(it)
                 } else {
                     view.showFlightResultsEmpty()
                 }
             }, {
-                view.showFlightResultsError(it.localizedMessage)
+                //TODO make sure it calls R.string.<your_error_message> instead hardcoded
+                view.showFlightResultsError("THIS IS A ERROR!!")
             })
         )
     }
