@@ -1,81 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-    <include
-            android:id="@+id/lineContainer1"
-            layout="@layout/item_flight_result_icon_line"
-            android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
-            android:layout_height="wrap_content"/>
-
-    <!--<include-->
-            <!--android:id="@+id/lineContainer2"-->
-            <!--layout="@layout/item_flight_result_icon_line"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="16dp"-->
-            <!--android:layout_below="@+id/lineContainer1"-->
-    <!--/>-->
-
-    <View
-            android:id="@+id/lineDivider"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/dividerColor"
-            android:layout_below="@+id/lineContainer1"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"/>
-
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="8dp"
+        app:cardElevation="4dp">
 
     <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_below="@+id/lineDivider">
+            android:padding="6dp">
+
+        <include
+                android:id="@+id/resultsContainer"
+                layout="@layout/item_flight_result_icon_line"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"/>
+
+        <View
+                android:id="@+id/lineDivider"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dividerColor"
+                android:layout_below="@+id/resultsContainer"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"/>
+
 
         <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true">
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/lineDivider">
 
-            <ImageView
-                    android:id="@+id/I1_rateIcon"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"/>
-
-            <TextView
-                    android:id="@+id/I1_rateText"
+            <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10.0"
-                    android:layout_toEndOf="@+id/I1_rateIcon"
-                    style="@style/PrimaryTextBlack"/>
+                    android:layout_alignParentStart="true">
 
-        </RelativeLayout>
+                <ImageView
+                        android:id="@+id/I1_rateIcon"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"/>
 
-        <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true">
+                <TextView
+                        android:id="@+id/I1_rateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10.0"
+                        android:layout_toEndOf="@+id/I1_rateIcon"
+                        style="@style/PrimaryTextBlack"/>
 
-            <TextView
-                    android:id="@+id/I1_price"
+            </RelativeLayout>
+
+            <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ 10.0"
-                    style="@style/PrimaryTextBlack"/>
+                    android:layout_alignParentEnd="true">
 
-            <TextView
-                    android:id="@+id/I1_site"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="www.avianca.com"
-                    android:layout_below="@+id/I1_price"
-                    style="@style/SecondaryTextBlack"/>
+                <TextView
+                        android:id="@+id/I1_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$ 10.0"
+                        style="@style/PrimaryTextBlack"/>
+
+                <TextView
+                        android:id="@+id/I1_site"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="www.avianca.com"
+                        android:layout_below="@+id/I1_price"
+                        style="@style/SecondaryTextBlack"/>
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+
+</androidx.cardview.widget.CardView>

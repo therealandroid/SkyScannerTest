@@ -20,5 +20,9 @@ data class Legs(
     @SerializedName("Duration")
     val duration: Long,
     @SerializedName("Directionality")
-    val directionality: String
+    val directionality: String,
+    @SerializedName("SegmentIds")
+    val segmentIds: List<Long>,
+    @SerializedName("Carriers")
+    val carrierIds: List<Long>
 )

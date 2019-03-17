@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.skyscannerapplication.R
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResponse
+import br.com.skyscannerapplication.model.entities.out.FlightResult
 import br.com.skyscannerapplication.model.repository.LivePricingRepositoryImpl
 import kotlinx.android.synthetic.main.fragment_search_flights.*
 import kotlinx.android.synthetic.main.fragment_search_flights.view.*
@@ -57,7 +57,7 @@ class FlightResultsFragment : Fragment(), FlightResultsContract.View {
         }
     }
 
-    override fun showFlightResults(flights: MutableList<FlightResponse>) {
+    override fun showFlightResults(flights: MutableList<FlightResult>) {
         adapter.setData(flights)
     }
 

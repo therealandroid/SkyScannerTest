@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        app:cardElevation="2dp">
+
+    <RelativeLayout
+            android:id="@+id/resultsInfo"
+            android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="2dp"
+            android:layout_height="?attr/actionBarSize">
+
+        <TextView
+                android:id="@+id/totalResults"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/PrimaryTextBlack"
+                android:layout_centerVertical="true"
+                android:text="0 of 0 results"/>
+
+        <TextView
+                android:id="@+id/filters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/PrimaryTextBlack"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:text="SORT AND FILTERS"/>
+
+    </RelativeLayout>
 
     <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-</LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"/>
+</androidx.cardview.widget.CardView>

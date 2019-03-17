@@ -1,7 +1,6 @@
 package br.com.skyscannerapplication.mocks
 
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResponse
 
 object MockedData {
      val SAMPLE_FLIGHT_REQUEST = FlightRequest(

@@ -6,16 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.skyscannerapplication.R
-import br.com.skyscannerapplication.model.entities.out.FlightResponse
+import br.com.skyscannerapplication.model.entities.out.FlightResult
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_flight_result.view.*
 import kotlinx.android.synthetic.main.item_flight_result_icon_line.view.*
 
 class FlightResultsAdapter : Adapter<FlightResultsAdapter.FlightResultViewHolder>() {
 
-    var flightItems = mutableListOf<FlightResponse>()
+    var flightItems = mutableListOf<FlightResult>()
 
-    fun setData(flightItems: MutableList<FlightResponse>) {
+    fun setData(flightItems: MutableList<FlightResult>) {
         this.flightItems = flightItems
         notifyDataSetChanged()
     }
@@ -45,15 +44,13 @@ class FlightResultsAdapter : Adapter<FlightResultsAdapter.FlightResultViewHolder
      */
     inner class FlightResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(flightItem: FlightResponse) {
-            Picasso.get().load("https://s1.apideeplink.com/images/airlines/EZ.png").into(itemView.I1_carrierImage)
+        init {
+            itemView.setOnClickListener { }
+        }
 
-//            itemView.I1_directionType
-//            itemView.I1_totalFlightDuration
-//            itemView.I1_site
-//            itemView.I1_rateIcon
-//            itemView.I1_rateText
-//            itemView.I1_price
+        fun bind(flightItem: FlightResult) {
+            Picasso.get().load(flightItem.outFlightInfo.carrierImageUrl).into(itemView.I1_outcomeCarrierImage)
+            Picasso.get().load(flightItem.arriveFlightInfo.carrierImageUrl).into(itemView.I1_incomeCarrierImage)
         }
     }
 }

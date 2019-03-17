@@ -1,7 +1,7 @@
 package br.com.skyscannerapplication.view.flights
 
 import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResponse
+import br.com.skyscannerapplication.model.entities.out.FlightResult
 
 interface FlightResultsContract {
 
@@ -11,7 +11,7 @@ interface FlightResultsContract {
 
     interface View {
         fun setProgressIndicator(boolean: Boolean)
-        fun showFlightResults(flights: MutableList<FlightResponse>)
+        fun showFlightResults(flights: MutableList<FlightResult>)
         fun showFlightResultsEmpty()
         fun showFlightResultsError(errorMessage: String)
     }
