@@ -1,6 +1,7 @@
 package br.com.skyscannerapplication.model.apiwrapper.routes
 
 import br.com.skyscannerapplication.model.entities.api.Flight
+import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.*

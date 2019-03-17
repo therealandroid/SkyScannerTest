@@ -2,10 +2,12 @@
     <string name="app_name">SkyScannerApplication</string>
 
 
+    <string name="flight_results">%1$d of %2$d</string>
     <string name="flight_price">%1$s %2$.2f</string>
     <string name="departure_and_arrival_time">%1$s-%2$s</string>
     <string name="carrier_info">%1$s-%2$s, %3$s </string>
     <string name="time_format">HH:mm</string>
+    <string name="time_format_day_month">HH:mm</string>
     <string name="skyscanner_website">via skyscanner.com</string>
 
     <string name="no_flights_found">No flights found</string>

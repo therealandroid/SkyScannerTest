@@ -1,4 +1,4 @@
-package br.com.skyscannerapplication.extensions
+package br.com.skyscannerapplication.config.extensions
 
 fun Long.minutesToPeriod(): String {
     val days = (this / 24 / 60)

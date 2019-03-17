@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00AFE4</color>
-    <color name="colorPrimaryDark">#0091BD</color>
-    <color name="colorAccent">#FF5722</color>
-    <color name="textPrimaryColor">#2B2B2B</color>
-    <color name="textSecondaryColor">#5C5C5C</color>
-    <color name="dividerColor">#B3B3B3</color>
+    <color name="colorPrimary">#03B0D5</color>
+    <color name="colorPrimaryDark">#0190AF</color>
+    <color name="toolbarTitleColor">#FFFFFF</color>
+    <color name="toolbarSubtitleColor">#E2FFFFFF</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="textPrimaryColor">#000000</color>
+    <color name="textSecondaryColor">#353535</color>
+    <color name="dividerColor">#1F000000</color>
     <color name="skeletonViewColor">#F0F0F0</color>
     <color name="skeletonViewShimmerColor">#E2E2E2</color>
+    <color name="alertViewPrimaryColor">#E2FFFFFF</color>
 </resources>

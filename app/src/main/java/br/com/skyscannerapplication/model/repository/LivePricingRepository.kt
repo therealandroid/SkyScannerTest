@@ -1,7 +1,7 @@
 package br.com.skyscannerapplication.model.repository
 
-import br.com.skyscannerapplication.model.entities.pojo.FlightRequest
-import br.com.skyscannerapplication.model.entities.pojo.FlightResult
+import br.com.skyscannerapplication.model.pojo.FlightRequest
+import br.com.skyscannerapplication.model.pojo.FlightResult
 import io.reactivex.Single
 
 interface LivePricingRepository {

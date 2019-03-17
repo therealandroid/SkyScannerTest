@@ -16,8 +16,8 @@
 
         <ImageView
                 android:id="@+id/outBoundCarrierImage"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="@dimen/favicon_width"
+                android:layout_height="@dimen/favicon_height"
                 android:layout_weight="0"/>
 
         <RelativeLayout
@@ -29,16 +29,14 @@
             <TextView
                     android:id="@+id/outBoundDepartureAndArrivalTime"
                     android:layout_width="wrap_content"
-                    style="@style/PrimaryTextBlack"
-                    android:text="sdfdsfsdfsdsdsdsdsdsdsdsdsdsd"
+                    style="@style/PrimaryTextBlackStyle"
                     android:layout_height="wrap_content"/>
 
             <TextView
                     android:id="@+id/outboundCarrierInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/SecondaryTextBlack"
-                    android:text="dsfdfssdsdsdsdsdsdsdsddf"
+                    style="@style/SecondaryTextBlackStyle"
                     android:layout_below="@+id/outBoundDepartureAndArrivalTime"/>
 
         </RelativeLayout>
@@ -51,16 +49,14 @@
             <TextView
                     android:id="@+id/outBoundDirectionType"
                     android:layout_width="wrap_content"
-                    style="@style/PrimaryTextBlack"
-                    android:text="inbound"
+                    style="@style/PrimaryTextBlackStyle"
                     android:layout_height="wrap_content"/>
 
             <TextView
                     android:id="@+id/outBoundTotalFlightDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/SecondaryTextBlack"
-                    android:text="12"
+                    style="@style/SecondaryTextBlackStyle"
                     android:layout_below="@+id/outBoundDirectionType"/>
 
         </RelativeLayout>
@@ -78,8 +74,8 @@
 
         <ImageView
                 android:id="@+id/inBoundCarrierImage"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="@dimen/favicon_width"
+                android:layout_height="@dimen/favicon_height"
                 android:layout_weight="0"/>
 
         <RelativeLayout
@@ -91,16 +87,14 @@
             <TextView
                     android:id="@+id/inBoundDepartureAndArrivalTime"
                     android:layout_width="wrap_content"
-                    style="@style/PrimaryTextBlack"
-                    android:text="sdfdsfsdfsd"
+                    style="@style/PrimaryTextBlackStyle"
                     android:layout_height="wrap_content"/>
 
             <TextView
                     android:id="@+id/inBoundCarrierInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/SecondaryTextBlack"
-                    android:text="dsfdfsdf"
+                    style="@style/SecondaryTextBlackStyle"
                     android:layout_below="@+id/inBoundDepartureAndArrivalTime"/>
 
         </RelativeLayout>
@@ -113,16 +107,14 @@
             <TextView
                     android:id="@+id/inBoundDirectionType"
                     android:layout_width="wrap_content"
-                    style="@style/PrimaryTextBlack"
-                    android:text="sdfdsfsdfsd"
+                    style="@style/PrimaryTextBlackStyle"
                     android:layout_height="wrap_content"/>
 
             <TextView
                     android:id="@+id/inBoundTotalFlightDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/SecondaryTextBlack"
-                    android:text="dsfdfsdf"
+                    style="@style/SecondaryTextBlackStyle"
                     android:layout_below="@+id/inBoundDirectionType"/>
 
         </RelativeLayout>

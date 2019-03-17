@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.skyscannerapplication.R
-import br.com.skyscannerapplication.model.entities.pojo.FlightRequest
-import br.com.skyscannerapplication.model.entities.pojo.FlightResult
-import br.com.skyscannerapplication.model.entities.pojo.RequestError
+import br.com.skyscannerapplication.config.AppConstants
+import br.com.skyscannerapplication.model.pojo.FlightRequest
+import br.com.skyscannerapplication.model.pojo.FlightResult
+import br.com.skyscannerapplication.model.pojo.RequestError
 import br.com.skyscannerapplication.model.repository.LivePricingRepositoryImpl
 import com.ethanhua.skeleton.RecyclerViewSkeletonScreen
 import com.ethanhua.skeleton.Skeleton
@@ -18,28 +18,20 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.alert_view.*
 import kotlinx.android.synthetic.main.fragment_search_flights.view.*
 
+
 class FlightResultsFragment : Fragment(), FlightResultsContract.View {
+
+    interface FlightResultFragmentCallback {
+        fun flightResultCount(totalFlightsFound: Int)
+    }
+
+    private var callback: FlightResultsFragment.FlightResultFragmentCallback? = null
 
     private val searchFlightsPresenter = FlightResultsPresenter(LivePricingRepositoryImpl(), this)
 
-    private val FLIGHT_REQUEST_FORM_DATA = FlightRequest(
-        cabinclass = "Economy",
-        country = "UK",
-        currency = "GBP",
-        locale = "en-GB",
-        locationschema = "sky",
-        originplace = "EDI-sky",
-        destinationplace = "LOND-sky",
-        outbounddate = "2019-03-18", //Go on next monday
-        inbounddate = "2019-03-19", //back a day after
-        adults = 1,
-        children = 0,
-        infants = 0,
-        apikey = "ss630745725358065467897349852985"
-    )
-
     private val adapter = FlightResultsAdapter()
     private var skeletonView: RecyclerViewSkeletonScreen? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search_flights, container, false)
@@ -48,9 +40,10 @@ class FlightResultsFragment : Fragment(), FlightResultsContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.flightResultsRecyclerView.layoutManager = LinearLayoutManager(context)
         view.flightResultsRecyclerView.adapter = adapter
-        searchFlightsPresenter.searchFlights(
-            FLIGHT_REQUEST_FORM_DATA
-        )
+
+        val flightRequest = arguments?.getSerializable(AppConstants.BUNDLE_FLIGHT_REQUEST_EXTRA_KEY)
+
+        searchFlightsPresenter.searchFlights(flightRequest as FlightRequest)
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -69,6 +62,7 @@ class FlightResultsFragment : Fragment(), FlightResultsContract.View {
     }
 
     override fun showFlightResults(flights: MutableList<FlightResult>) {
+        callback?.flightResultCount(flights.size) // Update activity result
         adapter.setData(flights)
     }
 
@@ -87,5 +81,9 @@ class FlightResultsFragment : Fragment(), FlightResultsContract.View {
     override fun onStop() {
         super.onStop()
         searchFlightsPresenter.disposeCalls()
+    }
+
+    fun setFlightResultsCallback(callback: FlightResultFragmentCallback) {
+        this.callback = callback
     }
 }

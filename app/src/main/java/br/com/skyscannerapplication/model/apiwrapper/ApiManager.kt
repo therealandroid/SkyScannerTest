@@ -1,18 +1,12 @@
 package br.com.skyscannerapplication.model.apiwrapper
 
-import android.util.Log
+import br.com.skyscannerapplication.config.ConfigutarionFile
 import br.com.skyscannerapplication.model.apiwrapper.routes.LivePricingService
 import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.NetworkInterface
-import java.net.SocketException
-import com.google.gson.Gson
-
-
 
 
 /**

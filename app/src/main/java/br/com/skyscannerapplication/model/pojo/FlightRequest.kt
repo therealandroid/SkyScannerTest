@@ -1,4 +1,6 @@
-package br.com.skyscannerapplication.model.entities.pojo
+package br.com.skyscannerapplication.model.pojo
+
+import java.io.Serializable
 
 /**
  * Use this object to make new flight requests
@@ -19,5 +21,4 @@ data class FlightRequest(
     val children: Int,
     val infants: Int,
     val apikey: String
-
-)
+): Serializable

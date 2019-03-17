@@ -20,6 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
+    }
 }
 
 dependencies {
@@ -64,6 +69,8 @@ dependencies {
 
     //Image caching and display
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    ////////External libs/////
 
     //Skeleton view
     implementation 'com.ethanhua:skeleton:1.1.2'

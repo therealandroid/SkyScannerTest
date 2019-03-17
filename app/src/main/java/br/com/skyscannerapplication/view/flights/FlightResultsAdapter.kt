@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.skyscannerapplication.R
-import br.com.skyscannerapplication.extensions.minutesToPeriod
-import br.com.skyscannerapplication.model.entities.pojo.FlightResult
+import br.com.skyscannerapplication.config.extensions.minutesToPeriod
+import br.com.skyscannerapplication.model.pojo.FlightResult
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_flight_result.view.*
 import kotlinx.android.synthetic.main.item_flight_result_icon_line.view.*

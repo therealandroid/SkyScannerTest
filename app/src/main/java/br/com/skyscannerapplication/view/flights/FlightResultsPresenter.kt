@@ -1,8 +1,8 @@
 package br.com.skyscannerapplication.view.flights
 
 import br.com.skyscannerapplication.R
-import br.com.skyscannerapplication.model.entities.pojo.FlightRequest
-import br.com.skyscannerapplication.model.entities.pojo.RequestError
+import br.com.skyscannerapplication.model.pojo.FlightRequest
+import br.com.skyscannerapplication.model.pojo.RequestError
 import br.com.skyscannerapplication.model.repository.LivePricingRepository
 import br.com.skyscannerapplication.view.base.BasePresenter
 import io.reactivex.disposables.CompositeDisposable

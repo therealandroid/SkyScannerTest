@@ -12,7 +12,7 @@
             android:id="@+id/alertViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/AlertViewTitle"/>
+            style="@style/AlertViewTitleStyle"/>
 
     <ImageView
             android:id="@+id/alertViewIcon"
