@@ -19,7 +19,9 @@ data class Flight(
     @SerializedName("Currencies")
     val currencies: List<Currencies> = mutableListOf(),
     @SerializedName("Places")
-    val places: List<Places> = mutableListOf()
+    val places: List<Places> = mutableListOf(),
+    @SerializedName("Query")
+    val query: Query = Query()
 
 
 )

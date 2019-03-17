@@ -62,7 +62,11 @@ dependencies {
 
     implementation "com.squareup.okhttp3:okhttp:3.12.1"
 
-    //Display Image
+    //Image caching and display
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Skeleton view
+    implementation 'com.ethanhua:skeleton:1.1.2'
+    implementation 'io.supercharge:shimmerlayout:2.1.0'
 
 }

@@ -45,18 +45,18 @@
                     android:layout_alignParentStart="true">
 
                 <ImageView
-                        android:id="@+id/I1_rateIcon"
+                        android:id="@+id/rateTripIcon"
                         android:layout_width="32dp"
                         android:layout_height="32dp"/>
 
                 <TextView
-                        android:id="@+id/I1_rateText"
+                        android:id="@+id/userRatingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10.0"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/I1_rateIcon"
+                        android:layout_toEndOf="@+id/rateTripIcon"
                         style="@style/PrimaryTextBlack"/>
 
             </RelativeLayout>
@@ -64,12 +64,14 @@
             <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true">
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end">
 
                 <TextView
                         android:id="@+id/flightResultPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:text="$ 10.0"
                         style="@style/PrimaryTextBlack"/>
 
@@ -78,6 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="www.avianca.com"
+                        android:layout_alignParentEnd="true"
                         android:layout_below="@+id/flightResultPrice"/>
             </RelativeLayout>
         </RelativeLayout>

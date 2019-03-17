@@ -1,9 +1,12 @@
 package br.com.skyscannerapplication.view.flights
 
-import br.com.skyscannerapplication.model.entities.out.FlightRequest
+import br.com.skyscannerapplication.R
+import br.com.skyscannerapplication.model.entities.pojo.FlightRequest
+import br.com.skyscannerapplication.model.entities.pojo.RequestError
 import br.com.skyscannerapplication.model.repository.LivePricingRepository
 import br.com.skyscannerapplication.view.base.BasePresenter
 import io.reactivex.disposables.CompositeDisposable
+import java.net.UnknownHostException
 
 
 class FlightResultsPresenter(
@@ -20,11 +23,11 @@ class FlightResultsPresenter(
      *
      */
     override fun searchFlights(flightRequest: FlightRequest) {
-        view.setProgressIndicator(true)
+        view.showLoading()
 
         compositeDisposable.add(repository.getFlights(flightRequest)
             .doFinally {
-                view.setProgressIndicator(false)
+                view.hideLoading()
             }.subscribe({
                 if (it.isNotEmpty()) {
                     view.showFlightResults(it)
@@ -32,10 +35,23 @@ class FlightResultsPresenter(
                     view.showFlightResultsEmpty()
                 }
             }, {
-                //TODO make sure it calls R.string.<your_error_message> instead hardcoded
-                view.showFlightResultsError("THIS IS A ERROR!!")
+                view.showFlightResultsError(handleExceptions(it))
             })
         )
+    }
+
+    private fun handleExceptions(throwable: Throwable): RequestError {
+        return if (throwable is UnknownHostException) {
+            RequestError(
+                R.string.no_internet_connection,
+                R.drawable.ic_no_internet
+            )
+        } else {
+            RequestError(
+                R.string.no_flights_found,
+                R.drawable.ic_no_results
+            )
+        }
     }
 
     override fun disposeCalls() {

@@ -1,4 +1,4 @@
-package br.com.skyscannerapplication.model.entities.out
+package br.com.skyscannerapplication.model.entities.pojo
 
 /**
  * Use this object to make new flight requests

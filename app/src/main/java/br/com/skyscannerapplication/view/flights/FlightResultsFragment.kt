@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.skyscannerapplication.R
-import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResult
+import br.com.skyscannerapplication.model.entities.pojo.FlightRequest
+import br.com.skyscannerapplication.model.entities.pojo.FlightResult
+import br.com.skyscannerapplication.model.entities.pojo.RequestError
 import br.com.skyscannerapplication.model.repository.LivePricingRepositoryImpl
-import kotlinx.android.synthetic.main.fragment_search_flights.*
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen
+import com.ethanhua.skeleton.Skeleton
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.alert_view.*
 import kotlinx.android.synthetic.main.fragment_search_flights.view.*
 
 class FlightResultsFragment : Fragment(), FlightResultsContract.View {
@@ -33,7 +38,8 @@ class FlightResultsFragment : Fragment(), FlightResultsContract.View {
         apikey = "ss630745725358065467897349852985"
     )
 
-    val adapter = FlightResultsAdapter()
+    private val adapter = FlightResultsAdapter()
+    private var skeletonView: RecyclerViewSkeletonScreen? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search_flights, container, false)
@@ -49,12 +55,17 @@ class FlightResultsFragment : Fragment(), FlightResultsContract.View {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun setProgressIndicator(isLoading: Boolean) {
-        if (isLoading) {
-            progressIndicator.visibility = View.VISIBLE
-        } else {
-            progressIndicator.visibility = View.GONE
-        }
+    override fun showLoading() {
+        skeletonView = Skeleton.bind(view?.flightResultsRecyclerView)
+            .adapter(adapter)
+            .load(R.layout.item_flight_result_skeleton)
+            .color(R.color.skeletonViewShimmerColor)
+            .duration(1200)
+            .show()
+    }
+
+    override fun hideLoading() {
+        skeletonView?.hide()
     }
 
     override fun showFlightResults(flights: MutableList<FlightResult>) {
@@ -62,9 +73,15 @@ class FlightResultsFragment : Fragment(), FlightResultsContract.View {
     }
 
     override fun showFlightResultsEmpty() {
+        alertView.visibility = View.VISIBLE
+        alertViewTitle.text = getString(R.string.no_flights_found)
+        Picasso.get().load(R.drawable.ic_no_results).into(alertViewIcon)
     }
 
-    override fun showFlightResultsError(errorMessage: String) {
+    override fun showFlightResultsError(requestError: RequestError) {
+        alertView.visibility = View.VISIBLE
+        alertViewTitle.text = getString(requestError.resMessage)
+        Picasso.get().load(requestError.resIcon).into(alertViewIcon)
     }
 
     override fun onStop() {

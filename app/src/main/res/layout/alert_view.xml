@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/alertView"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center">
+
+    <TextView
+            android:id="@+id/alertViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AlertViewTitle"/>
+
+    <ImageView
+            android:id="@+id/alertViewIcon"
+            android:layout_width="82dp"
+            android:layout_height="82dp"/>
+
+</LinearLayout>

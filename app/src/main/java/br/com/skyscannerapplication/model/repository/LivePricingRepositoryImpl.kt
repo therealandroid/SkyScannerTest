@@ -3,9 +3,9 @@ package br.com.skyscannerapplication.model.repository
 import br.com.skyscannerapplication.model.apiwrapper.ApiManager
 import br.com.skyscannerapplication.model.apiwrapper.ConfigutarionFile
 import br.com.skyscannerapplication.model.entities.api.Flight
-import br.com.skyscannerapplication.model.entities.out.FlightInfo
-import br.com.skyscannerapplication.model.entities.out.FlightRequest
-import br.com.skyscannerapplication.model.entities.out.FlightResult
+import br.com.skyscannerapplication.model.entities.pojo.FlightInfo
+import br.com.skyscannerapplication.model.entities.pojo.FlightRequest
+import br.com.skyscannerapplication.model.entities.pojo.FlightResult
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -162,7 +162,8 @@ class LivePricingRepositoryImpl : LivePricingRepository {
             FlightResult(
                 arriveFlightResult,
                 outFlightResult,
-                flight.currencies.first().symbol
+                flight.currencies.first().symbol,
+                flight.query.locale
             )
         }.toMutableList()
     }

@@ -1,4 +1,4 @@
-package br.com.skyscannerapplication.model.entities.out
+package br.com.skyscannerapplication.model.entities.pojo
 
 import java.util.*
 
@@ -19,7 +19,8 @@ data class FlightInfo(
  * This POJO class
  */
 data class FlightResult(
-    val arriveFlightInfo: FlightInfo,
-    val outFlightInfo: FlightInfo,
-    val currencySymbol: String = ""
+    val inBoundFlightInfo: FlightInfo,
+    val outBoundFlightInfo: FlightInfo,
+    val currencySymbol: String = "",
+    val locale: String?
 )

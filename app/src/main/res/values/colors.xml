@@ -3,7 +3,9 @@
     <color name="colorPrimary">#00AFE4</color>
     <color name="colorPrimaryDark">#0091BD</color>
     <color name="colorAccent">#FF5722</color>
-    <color name="textPrimaryColor">#131313</color>
+    <color name="textPrimaryColor">#2B2B2B</color>
     <color name="textSecondaryColor">#5C5C5C</color>
     <color name="dividerColor">#B3B3B3</color>
+    <color name="skeletonViewColor">#F0F0F0</color>
+    <color name="skeletonViewShimmerColor">#E2E2E2</color>
 </resources>

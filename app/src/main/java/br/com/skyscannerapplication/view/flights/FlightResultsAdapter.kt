@@ -3,14 +3,18 @@ package br.com.skyscannerapplication.view.flights
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.skyscannerapplication.R
-import br.com.skyscannerapplication.model.entities.out.FlightResult
+import br.com.skyscannerapplication.extensions.minutesToPeriod
+import br.com.skyscannerapplication.model.entities.pojo.FlightResult
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_flight_result.view.*
 import kotlinx.android.synthetic.main.item_flight_result_icon_line.view.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FlightResultsAdapter : Adapter<FlightResultsAdapter.FlightResultViewHolder>() {
@@ -40,75 +44,88 @@ class FlightResultsAdapter : Adapter<FlightResultsAdapter.FlightResultViewHolder
         holder.bind(flightItems[position])
     }
 
-    /**
-     * All ID's for this item is identifiable
-     * by I1_ prefix
-     *
-     */
     inner class FlightResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        init {
-            itemView.setOnClickListener { }
-        }
-
-        fun minutesToPeriod(time: Long): String {
-            val days = (time / 24 / 60)
-            val hours = time / 60 % 24
-            val minutes = time % 60
-
-            return if (days > 0) {
-                "$days d $hours h $minutes m"
-            } else if (hours > 0) {
-                "$hours h $minutes m"
-            } else {
-                "$hours h $minutes m"
-            }
-        }
-
         fun bind(flightItem: FlightResult) {
-            //OutBound flight info
-            itemView.outboundCarrierDisplayCodeAndName.text =
-                "${flightItem.arriveFlightInfo.originAirport}-${flightItem.arriveFlightInfo.destinyAirport}," +
-                        " ${flightItem.arriveFlightInfo.carrierName}"
+            val context = itemView.context
+            val dateFormatter = SimpleDateFormat(context.getString(R.string.time_format), Locale(flightItem.locale))
 
-            val outboundDateFormatter = SimpleDateFormat("HH:mm")
-            val outboundDepartureTime = outboundDateFormatter.format(flightItem.arriveFlightInfo.departure)
-            val outboundArriveTime = outboundDateFormatter.format(flightItem.arriveFlightInfo.arrival)
+            //////////////////////////////////////////////////////////////////
+            /////////////OutBound flight info binding/////////////////////////
 
-            itemView.outBoundDepartureAndArrivalTime.text = "$outboundDepartureTime - $outboundArriveTime"
+            itemView.outboundCarrierInfo.text =
+                context.getString(
+                    R.string.carrier_info,
+                    flightItem.outBoundFlightInfo.originAirport,
+                    flightItem.outBoundFlightInfo.destinyAirport,
+                    flightItem.outBoundFlightInfo.carrierName
+                )
 
-            itemView.outBoundDirectionType.text = flightItem.arriveFlightInfo.direction
-            val outboundTotalFlightDuration = minutesToPeriod(flightItem.arriveFlightInfo.duration!!)
+            val outboundDepartureTime = dateFormatter.format(flightItem.outBoundFlightInfo.departure)
+            val outboundArriveTime = dateFormatter.format(flightItem.outBoundFlightInfo.arrival)
+
+            itemView.outBoundDepartureAndArrivalTime.text =
+                context.getString(
+                    R.string.departure_and_arrival_time,
+                    outboundDepartureTime,
+                    outboundArriveTime
+                )
+
+            itemView.outBoundDirectionType.text = flightItem.outBoundFlightInfo.direction
+            val outboundTotalFlightDuration = flightItem.outBoundFlightInfo.duration!!.minutesToPeriod() //TODO fix !!
             itemView.outBoundTotalFlightDuration.text = outboundTotalFlightDuration
-            Picasso.get().load(flightItem.outFlightInfo.carrierImageUrl).into(itemView.outBoundCarrierImage)
+            Picasso.get().load(flightItem.outBoundFlightInfo.carrierImageUrl).into(itemView.outBoundCarrierImage)
 
-            //InBound flight info
-            Picasso.get().load(flightItem.arriveFlightInfo.carrierImageUrl).into(itemView.inBoundCarrierImage)
-            itemView.inBoundCarrierDisplayCodeAndName.text =
-                "${flightItem.arriveFlightInfo.originAirport}-${flightItem.arriveFlightInfo.destinyAirport}," +
-                        " ${flightItem.arriveFlightInfo.carrierName}"
+            ////////////////////////////////////////////////////////////
+            //////////////////InBound flight info binding///////////////
+            Picasso.get().load(flightItem.inBoundFlightInfo.carrierImageUrl).into(itemView.inBoundCarrierImage)
 
-            val inboundDateFormatter = SimpleDateFormat("HH:mm")
-            val inboundDepartureTime = inboundDateFormatter.format(flightItem.arriveFlightInfo.departure)
-            val inboundArriveTime = inboundDateFormatter.format(flightItem.arriveFlightInfo.arrival)
+            itemView.inBoundCarrierInfo.text =
+                context.getString(
+                    R.string.carrier_info,
+                    flightItem.inBoundFlightInfo.originAirport,
+                    flightItem.inBoundFlightInfo.destinyAirport,
+                    flightItem.inBoundFlightInfo.carrierName
+                )
 
-            itemView.inBoundDepartureAndArrivalTime.text = "$inboundDepartureTime - $inboundArriveTime"
+            val inboundDepartureTime = dateFormatter.format(flightItem.inBoundFlightInfo.departure)
+            val inboundArriveTime = dateFormatter.format(flightItem.inBoundFlightInfo.arrival)
 
-            itemView.inBoundDirectionType.text = flightItem.arriveFlightInfo.direction
-            val inboundTotalFlightDuration = minutesToPeriod(flightItem.arriveFlightInfo.duration)
+            itemView.inBoundDepartureAndArrivalTime.text =
+                context.getString(
+                    R.string.departure_and_arrival_time,
+                    inboundDepartureTime,
+                    inboundArriveTime
+                )
+
+            itemView.inBoundDirectionType.text = flightItem.inBoundFlightInfo.direction
+            val inboundTotalFlightDuration = flightItem.inBoundFlightInfo.duration!!.minutesToPeriod() //TODO
             itemView.inBoundTotalFlightDuration.text = inboundTotalFlightDuration
 
-            itemView.flightResultPrice.text = "${flightItem.currencySymbol} ${flightItem.arriveFlightInfo.price}"
-            itemView.flightResultSite.text = "www.jet.com"
+            itemView.flightResultPrice.text = context.getString(
+                R.string.flight_price,
+                flightItem.currencySymbol,
+                flightItem.inBoundFlightInfo.price
+            )
 
+            itemView.flightResultSite.text = context.getString(R.string.skyscanner_website)
+
+            setRandomRating(itemView.rateTripIcon, itemView.userRatingText)
+        }
+
+        private fun setRandomRating(iconView: ImageView, rateTextView: TextView) {
             val randomNote = (0..10).random()
-            itemView.I1_rateText.text = "$randomNote"
+            rateTextView.text = "$randomNote"
 
-            if (randomNote >= 6) {
-                Picasso.get().load(R.drawable.ic_face_smile).into(itemView.I1_rateIcon)
+            val iconRes: Int
+
+            iconRes = if (randomNote >= 6) {
+                R.drawable.ic_face_smile
             } else {
-                Picasso.get().load(R.drawable.ic_face_poker_face).into(itemView.I1_rateIcon)
+                R.drawable.ic_face_poker_face
             }
+
+            Picasso.get().load(iconRes).into(iconView)
         }
     }
 }
