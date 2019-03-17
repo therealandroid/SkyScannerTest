@@ -10,6 +10,7 @@ import java.util.*
  * The purpose of using @SerializedName is to keep using kotlin variable patterns as camel case
  *
  */
+
 data class Legs(
     @SerializedName("Id")
     val id: String,

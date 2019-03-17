@@ -54,6 +54,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10.0"
+                        android:layout_marginLeft="8dp"
+                        android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/I1_rateIcon"
                         style="@style/PrimaryTextBlack"/>
 
@@ -65,19 +67,18 @@
                     android:layout_alignParentEnd="true">
 
                 <TextView
-                        android:id="@+id/I1_price"
+                        android:id="@+id/flightResultPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$ 10.0"
                         style="@style/PrimaryTextBlack"/>
 
                 <TextView
-                        android:id="@+id/I1_site"
+                        android:id="@+id/flightResultSite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="www.avianca.com"
-                        android:layout_below="@+id/I1_price"
-                        style="@style/SecondaryTextBlack"/>
+                        android:layout_below="@+id/flightResultPrice"/>
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

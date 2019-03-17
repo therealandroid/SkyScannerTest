@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
     }
 
  */
-data class Station(
+data class Places(
     @SerializedName("Id")
     val id: Long,
     @SerializedName("Code")

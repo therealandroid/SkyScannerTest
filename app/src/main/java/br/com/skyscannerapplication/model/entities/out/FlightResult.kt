@@ -9,10 +9,17 @@ data class FlightInfo(
     val carrierName: String? = "",
     val carrierImageUrl: String? = "",
     val carrierDisplayCode: String? = "",
-    val price: Float = 0.0f
+    val direction: String? = "",
+    val price: Float? = 0.0f,
+    val originAirport: String? = "",
+    val destinyAirport: String? = ""
 )
 
+/**
+ * This POJO class
+ */
 data class FlightResult(
-    var arriveFlightInfo: FlightInfo,
-    var outFlightInfo: FlightInfo
+    val arriveFlightInfo: FlightInfo,
+    val outFlightInfo: FlightInfo,
+    val currencySymbol: String = ""
 )

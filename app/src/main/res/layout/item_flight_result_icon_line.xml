@@ -7,15 +7,15 @@
         android:layout_height="wrap_content">
 
     <LinearLayout
-            android:id="@+id/I1_outcomeContent"
-                  android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginStart="16dp"
-                  android:layout_marginEnd="16dp">
+            android:id="@+id/outBoundContainer"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
 
         <ImageView
-                android:id="@+id/I1_outcomeCarrierImage"
+                android:id="@+id/outBoundCarrierImage"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_weight="0"/>
@@ -27,19 +27,19 @@
                 android:layout_weight="1">
 
             <TextView
-                    android:id="@+id/I1_outcomeDepartureAndArrivalTime"
+                    android:id="@+id/outBoundDepartureAndArrivalTime"
                     android:layout_width="wrap_content"
                     style="@style/PrimaryTextBlack"
-                    android:text="sdfdsfsdfsd"
+                    android:text="sdfdsfsdfsdsdsdsdsdsdsdsdsdsd"
                     android:layout_height="wrap_content"/>
 
             <TextView
-                    android:id="@+id/I1_outcomeCarrierDisplayCodeAndName"
+                    android:id="@+id/outboundCarrierDisplayCodeAndName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/SecondaryTextBlack"
-                    android:text="dsfdfsdf"
-                    android:layout_below="@+id/I1_outcomeDepartureAndArrivalTime"/>
+                    android:text="dsfdfssdsdsdsdsdsdsdsddf"
+                    android:layout_below="@+id/outBoundDepartureAndArrivalTime"/>
 
         </RelativeLayout>
 
@@ -49,34 +49,35 @@
                 android:layout_marginStart="16dp">
 
             <TextView
-                    android:id="@+id/I1_outcomeDirectionType"
+                    android:id="@+id/outBoundDirectionType"
                     android:layout_width="wrap_content"
                     style="@style/PrimaryTextBlack"
-                    android:text="sdfdsfsdfsd"
+                    android:text="inbound"
                     android:layout_height="wrap_content"/>
 
             <TextView
-                    android:id="@+id/I1_outcomeTotalFlightDuration"
+                    android:id="@+id/outBoundTotalFlightDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/SecondaryTextBlack"
-                    android:text="dsfdfsdf"
-                    android:layout_below="@+id/I1_outcomeDirectionType"/>
+                    android:text="12"
+                    android:layout_below="@+id/outBoundDirectionType"/>
 
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/I1_incomeContent"
+            android:id="@+id/inBoundContainer"
+            android:layout_below="@+id/outBoundContainer"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            android:layout_below="@+id/I1_outcomeContent"
             android:layout_marginEnd="16dp">
 
         <ImageView
-                android:id="@+id/I1_incomeCarrierImage"
+                android:id="@+id/inBoundCarrierImage"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_weight="0"/>
@@ -88,19 +89,19 @@
                 android:layout_weight="1">
 
             <TextView
-                    android:id="@+id/I1_incomeDepartureAndArrivalTime"
+                    android:id="@+id/inBoundDepartureAndArrivalTime"
                     android:layout_width="wrap_content"
                     style="@style/PrimaryTextBlack"
                     android:text="sdfdsfsdfsd"
                     android:layout_height="wrap_content"/>
 
             <TextView
-                    android:id="@+id/I1_incomeCarrierDisplayCodeAndName"
+                    android:id="@+id/inBoundCarrierDisplayCodeAndName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/SecondaryTextBlack"
                     android:text="dsfdfsdf"
-                    android:layout_below="@+id/I1_incomeDepartureAndArrivalTime"/>
+                    android:layout_below="@+id/inBoundDepartureAndArrivalTime"/>
 
         </RelativeLayout>
 
@@ -110,19 +111,19 @@
                 android:layout_marginStart="16dp">
 
             <TextView
-                    android:id="@+id/I1_incomeDirectionType"
+                    android:id="@+id/inBoundDirectionType"
                     android:layout_width="wrap_content"
                     style="@style/PrimaryTextBlack"
                     android:text="sdfdsfsdfsd"
                     android:layout_height="wrap_content"/>
 
             <TextView
-                    android:id="@+id/I1_incomeTotalFlightDuration"
+                    android:id="@+id/inBoundTotalFlightDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/SecondaryTextBlack"
                     android:text="dsfdfsdf"
-                    android:layout_below="@+id/I1_incomeDirectionType"/>
+                    android:layout_below="@+id/inBoundDirectionType"/>
 
         </RelativeLayout>
     </LinearLayout>

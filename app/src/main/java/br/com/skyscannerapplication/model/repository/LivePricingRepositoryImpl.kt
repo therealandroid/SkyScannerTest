@@ -70,10 +70,11 @@ class LivePricingRepositoryImpl : LivePricingRepository {
      *
      */
     private fun processFlightResult(flight: Flight): MutableList<FlightResult> {
-        var itineraries = flight.itineraries
-        var legs = flight.legs
-        var segments = flight.segments
-        var carriers = flight.carriers
+        val itineraries = flight.itineraries
+        val legs = flight.legs
+        val segments = flight.segments
+        val carriers = flight.carriers
+        val places = flight.places
 
         return itineraries.map { itinerary ->
             //Find itinerary Inbound and Outbound leg
@@ -81,6 +82,7 @@ class LivePricingRepositoryImpl : LivePricingRepository {
             val outboundLeg = legs.find { legs ->
                 legs.id == itinerary.outBoundLegId
             }
+
             val inboudLeg = legs.find { legs ->
                 legs.id == itinerary.inboundLegId
             }
@@ -94,6 +96,7 @@ class LivePricingRepositoryImpl : LivePricingRepository {
             var outBoundCarrier = carriers.find { carrier ->
                 outboundCarrierId?.equals(carrier.id)!!
             }
+
             var inboudCarrier = carriers.find { carrier ->
                 inboudCarrierId?.equals(carrier.id)!! //TODO fix the nullpointers
             }
@@ -113,6 +116,23 @@ class LivePricingRepositoryImpl : LivePricingRepository {
                 it.id == inBoundSegmentId
             }
 
+            /////  FIND ORIGIN AND DESTINY PLACES///
+            val outBoundOriginPlace = places.find {
+                outBoundSegment?.destinationStation == it.id
+            }
+
+            val outBoundDestinyPlace = places.find {
+                outBoundSegment?.originStation == it.id
+            }
+
+            val inBoundOriginPlace = places.find {
+                inBoundSegment?.originStation == it.id
+            }
+
+            val inBoundDestinyPlace = places.find {
+                inBoundSegment?.destinationStation == it.id
+            }
+
             val outFlightResult = FlightInfo(
                 departure = outboundLeg?.departure,
                 arrival = outboundLeg?.arrival,
@@ -120,7 +140,10 @@ class LivePricingRepositoryImpl : LivePricingRepository {
                 carrierDisplayCode = outBoundCarrier?.displayCode,
                 carrierImageUrl = outBoundCarrier?.imageUrl,
                 carrierName = outBoundCarrier?.name,
-                price = itinerary.pricingOptions.first().price
+                price = itinerary.pricingOptions.first().price,
+                direction = outboundLeg?.directionality,
+                originAirport = outBoundOriginPlace?.code!!,
+                destinyAirport = outBoundDestinyPlace?.code!!
             )
 
             val arriveFlightResult = FlightInfo(
@@ -130,10 +153,17 @@ class LivePricingRepositoryImpl : LivePricingRepository {
                 carrierDisplayCode = inboudCarrier?.displayCode,
                 carrierImageUrl = inboudCarrier?.imageUrl,
                 carrierName = inboudCarrier?.name,
-                price = itinerary.pricingOptions.first().price
+                price = itinerary.pricingOptions.first().price,
+                direction = inboudLeg?.directionality,
+                originAirport = inBoundOriginPlace?.code!!,
+                destinyAirport = inBoundDestinyPlace?.code!!
             )
 
-            FlightResult(arriveFlightResult, outFlightResult)
+            FlightResult(
+                arriveFlightResult,
+                outFlightResult,
+                flight.currencies.first().symbol
+            )
         }.toMutableList()
     }
 

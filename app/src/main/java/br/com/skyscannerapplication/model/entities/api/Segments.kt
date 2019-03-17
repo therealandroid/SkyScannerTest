@@ -6,13 +6,13 @@ data class Segments(
     @SerializedName("Id")
     val id: Long,
     @SerializedName("OriginStation")
-    val OriginStation: Long,
+    val originStation: Long,
     @SerializedName("DestinationStation")
-    val DestinationStation: Long,
+    val destinationStation: Long,
     @SerializedName("DepartureDateTime")
-    val DepartureDateTime: String,
+    val departureDateTime: String,
     @SerializedName("ArrivalDateTime")
-    val ArrivalDateTime: String,
+    val arrivalDateTime: String,
     @SerializedName("Carrier")
     val carrierId: Long,
     @SerializedName("Duration")

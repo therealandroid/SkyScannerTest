@@ -9,15 +9,17 @@ import com.google.gson.annotations.SerializedName
 data class Flight(
 
     @SerializedName("Itineraries")
-    val itineraries: List<Itineraries>,
+    val itineraries: List<Itineraries> = mutableListOf(),
     @SerializedName("Legs")
-    val legs: List<Legs>,
+    val legs: List<Legs> = mutableListOf(),
     @SerializedName("Carriers")
-    val carriers: List<Carrier>,
+    val carriers: List<Carrier> = mutableListOf(),
     @SerializedName("Segments")
-    val segments: List<Segments>,
+    val segments: List<Segments> = mutableListOf(),
     @SerializedName("Currencies")
-    val currencies: List<Currencies>
+    val currencies: List<Currencies> = mutableListOf(),
+    @SerializedName("Places")
+    val places: List<Places> = mutableListOf()
 
 
 )
