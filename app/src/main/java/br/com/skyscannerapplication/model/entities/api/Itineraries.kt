@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Itineraries(
     @SerializedName("OutboundLegId")
-    val outBoundLegId: String,
+    val outBoundLegId: String? = "",
     @SerializedName("InboundLegId")
-    val inboundLegId: String,
+    val inboundLegId: String? = "",
     @SerializedName("PricingOptions")
-    val pricingOptions: List<PricingOptions>
+    val pricingOptions: List<PricingOptions>? = mutableListOf()
 
 
 )

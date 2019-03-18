@@ -15,6 +15,6 @@ interface FlightResultsContract {
         fun hideLoading()
         fun showFlightResults(flights: MutableList<FlightResult>)
         fun showFlightResultsEmpty()
-        fun showFlightResultsError(error: RequestError)
+        fun showFlightResultsError(requestError: RequestError)
     }
 }

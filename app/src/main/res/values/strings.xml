@@ -11,6 +11,6 @@
     <string name="skyscanner_website">via skyscanner.com</string>
 
     <string name="no_flights_found">No flights found</string>
-    <string name="no_internet_connection">Oops, seems you have no internet connection</string>
+    <string name="no_internet_connection">No internet connection</string>
 
 </resources>

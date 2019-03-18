@@ -13,17 +13,17 @@ import java.util.*
 
 data class Legs(
     @SerializedName("Id")
-    val id: String,
+    val id: String = "",
     @SerializedName("Departure")
-    val departure: Date,
+    val departure: Date = Date(),
     @SerializedName("Arrival")
-    val arrival: Date,
+    val arrival: Date = Date(),
     @SerializedName("Duration")
-    val duration: Long,
+    val duration: Long = 0,
     @SerializedName("Directionality")
-    val directionality: String,
+    val directionality: String = "",
     @SerializedName("SegmentIds")
-    val segmentIds: List<Long>,
+    val segmentIds: List<Long> = mutableListOf(),
     @SerializedName("Carriers")
-    val carrierIds: List<Long>
+    val carrierIds: List<Long> = mutableListOf()
 )

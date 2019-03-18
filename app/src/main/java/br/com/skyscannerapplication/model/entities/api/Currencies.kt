@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Currencies(
     @SerializedName("Code")
-    var code: String,
+    var code: String? = "",
     @SerializedName("Symbol")
-    var symbol: String
+    var symbol: String? = ""
 )

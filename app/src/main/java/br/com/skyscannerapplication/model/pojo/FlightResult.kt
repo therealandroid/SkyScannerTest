@@ -21,6 +21,6 @@ data class FlightInfo(
 data class FlightResult(
     val inBoundFlightInfo: FlightInfo,
     val outBoundFlightInfo: FlightInfo,
-    val currencySymbol: String = "",
+    val currencySymbol: String? = "$",
     val locale: String? = "US"
 )

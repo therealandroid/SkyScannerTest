@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class Carrier(
     @SerializedName("Id")
-    val id: Long,
+    val id: Long? = 0,
     @SerializedName("Code")
-    val code: String,
+    val code: String? = "",
     @SerializedName("Name")
-    val name: String,
+    val name: String? = "",
     @SerializedName("ImageUrl")
-    val imageUrl: String,
+    val imageUrl: String? = "",
     @SerializedName("DisplayCode")
-    val displayCode: String
+    val displayCode: String? = ""
 )

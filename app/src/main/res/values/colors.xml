@@ -10,5 +10,5 @@
     <color name="dividerColor">#1F000000</color>
     <color name="skeletonViewColor">#F0F0F0</color>
     <color name="skeletonViewShimmerColor">#E2E2E2</color>
-    <color name="alertViewPrimaryColor">#E2FFFFFF</color>
+    <color name="alertViewPrimaryColor">#BF3D3D3D</color>
 </resources>

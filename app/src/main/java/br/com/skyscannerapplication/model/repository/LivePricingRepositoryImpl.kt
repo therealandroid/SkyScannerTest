@@ -42,6 +42,7 @@ class LivePricingRepositoryImpl : LivePricingRepository {
      *  Following the Repository pattern, we will also give to the caller the appropriated view objects, so it will not
      *  need to handle conversions, mapping etc.
      *
+     *  TODO future: Implement a flowable solution to bring no delay to the user.
      */
     override fun getFlights(flightRequest: FlightRequest): Single<MutableList<FlightResult>> {
         return createSession(flightRequest)
@@ -57,62 +58,50 @@ class LivePricingRepositoryImpl : LivePricingRepository {
 
 
     /**
-     * We process the data so we can just get what we want to display
-     * in our screen
+     * This method process the data and map it creating the relation between
+     * the objects.
+     *
+     * It return a mutableList with the FlightResult to be used in the layer above
      *
      *   Let's get back to the exercise:
      *
-     *   From *Itineraries* We just need it to get other values to use like show in the mockup design
      *
-     *   From **Legs** we just need the **duration**, *departure* and *arrival* time
+     *   From *Itineraries* We just need it to get other object references from it
+     *
+     *   From **Legs** we just need the **duration**, *departure* and *arrival* time information
 
      *   From **Segments** - Individual flight information with directionality.
-     *
      */
-
-    private fun processFlightResult(flight: Flight): MutableList<FlightResult> {
+    fun processFlightResult(flight: Flight): MutableList<FlightResult> {
         val itineraries = flight.itineraries
 
         return itineraries.map { itinerary ->
+            //Getting Legs information
             val legs = flight.legs
 
             val outboundLeg = legs.find {
                 it.id == itinerary.outBoundLegId
             }
 
-            val inboudLeg = legs.find {
+            val inboundLeg = legs.find {
                 it.id == itinerary.inboundLegId
             }
 
-
-            val carriers = flight.carriers
-
-            val outboundCarrierId = outboundLeg?.carrierIds?.first()
-            val inboudCarrierId = inboudLeg?.carrierIds?.first()
-
-            var outBoundCarrier = carriers.find { carrier ->
-                outboundCarrierId?.equals(carrier.id)!!
-            }
-
-            var inboudCarrier = carriers.find { carrier ->
-                inboudCarrierId?.equals(carrier.id)!! //TODO fix the nullpointers
-            }
-
-
+            //Getting segments information
             val segments = flight.segments
 
-            var outBoundSegmentId = outboundLeg?.segmentIds?.first()
-            var inBoundSegmentId = inboudLeg?.segmentIds?.first()
+            val outBoundSegmentId = outboundLeg?.segmentIds?.first() ?: 0
+            val inBoundSegmentId = inboundLeg?.segmentIds?.first() ?: 0
 
-            var outBoundSegment = segments.find {
+            val outBoundSegment = segments.find {
                 it.id == outBoundSegmentId
             }
 
-            var inBoundSegment = segments.find {
+            val inBoundSegment = segments.find {
                 it.id == inBoundSegmentId
             }
 
-
+            //Getting places information
             val places = flight.places
 
             val outBoundOriginPlace = places.find {
@@ -131,6 +120,20 @@ class LivePricingRepositoryImpl : LivePricingRepository {
                 inBoundSegment?.destinationStation == it.id
             }
 
+            //Getting carrier information
+            val carriers = flight.carriers
+
+            val outboundCarrierId = outboundLeg?.carrierIds?.first() ?: 0
+            val inboundCarrierId = inboundLeg?.carrierIds?.first() ?: 0
+
+            val outBoundCarrier = carriers.find { carrier ->
+                outboundCarrierId == carrier.id
+            }
+
+            val inboundCarrier = carriers.find { carrier ->
+                inboundCarrierId == carrier.id
+            }
+
             val outboundFlightResult = FlightInfo(
                 departure = outboundLeg?.departure,
                 arrival = outboundLeg?.arrival,
@@ -138,20 +141,20 @@ class LivePricingRepositoryImpl : LivePricingRepository {
                 carrierDisplayCode = outBoundCarrier?.displayCode,
                 carrierImageUrl = outBoundCarrier?.imageUrl,
                 carrierName = outBoundCarrier?.name,
-                price = itinerary.pricingOptions.first().price,
+                price = itinerary.pricingOptions?.first()?.price,
                 direction = outboundLeg?.directionality,
                 originAirport = outBoundOriginPlace?.code,
                 destinyAirport = outBoundDestinyPlace?.code
             )
             val inboundFlightResult = FlightInfo(
-                departure = inboudLeg?.departure,
-                arrival = inboudLeg?.arrival,
-                duration = inboudLeg?.duration,
-                carrierDisplayCode = inboudCarrier?.displayCode,
-                carrierImageUrl = inboudCarrier?.imageUrl,
-                carrierName = inboudCarrier?.name,
-                price = itinerary.pricingOptions.first().price,
-                direction = inboudLeg?.directionality,
+                departure = inboundLeg?.departure,
+                arrival = inboundLeg?.arrival,
+                duration = inboundLeg?.duration,
+                carrierDisplayCode = inboundCarrier?.displayCode,
+                carrierImageUrl = inboundCarrier?.imageUrl,
+                carrierName = inboundCarrier?.name,
+                price = itinerary.pricingOptions?.first()?.price,
+                direction = inboundLeg?.directionality,
                 originAirport = inBoundOriginPlace?.code,
                 destinyAirport = inBoundDestinyPlace?.code
             )
@@ -164,6 +167,5 @@ class LivePricingRepositoryImpl : LivePricingRepository {
             )
         }.toMutableList()
     }
-
 
 }

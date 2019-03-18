@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName
 
 data class Segments(
     @SerializedName("Id")
-    val id: Long,
+    val id: Long? = 0,
     @SerializedName("OriginStation")
-    val originStation: Long,
+    val originStation: Long? = 0,
     @SerializedName("DestinationStation")
-    val destinationStation: Long,
+    val destinationStation: Long ? = 0,
     @SerializedName("DepartureDateTime")
-    val departureDateTime: String,
+    val departureDateTime: String? = "",
     @SerializedName("ArrivalDateTime")
-    val arrivalDateTime: String,
+    val arrivalDateTime: String? = "",
     @SerializedName("Carrier")
-    val carrierId: Long,
+    val carrierId: Long? = 0,
     @SerializedName("Duration")
-    val duration: Long,
+    val duration: Long? = 0,
     @SerializedName("FlightNumber")
-    val flightNumber: Long
+    val flightNumber: Long? = 0
 )
